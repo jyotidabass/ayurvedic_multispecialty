@@ -1,0 +1,368 @@
+{% extends 'amcweb/master.html' %}
+{% load static %}
+
+{% block title%}
+This is a title test bro
+{% endblock %}
+
+{% block main_content %}
+    <div class="top-message" id="top_msg" style="background-color: {{ err|yesno:'red,forestgreen,orange' }};">
+        {{ msg }}
+        {% if msg %}
+                <span close-target="top_msg" class="msg-close-btn">&times;</span>
+        {% endif %}
+        {% if err %}
+            {% if err and form %}
+                <script>
+                    function populateForm() {
+                        $('#ff_email').val('{{ form.email }}');
+                        $('#ff_name').val('{{ form.name }}');
+                    }
+                    $(document).ready(() => {
+                        populateForm();
+                    })
+                </script>
+            {% endif %}
+        {% endif %}
+    </div>
+	<div id="myCarousel" class="carousel slide" data-ride="carousel">
+		<!-- Indicators -->
+		<ol class="carousel-indicators">
+			<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+			<li data-target="#myCarousel" data-slide-to="1" class=""></li>
+			<li data-target="#myCarousel" data-slide-to="2" class=""></li>
+			<li data-target="#myCarousel" data-slide-to="3" class=""></li>
+		</ol>
+		<div class="carousel-inner" role="listbox">
+			<div class="item active">
+				<div class="container">
+					<div class="carousel-caption">
+						<h3>Straight from the <span>Vedas.</span></h3>
+						<p>Power and authenticity of Ayurveda</p>
+						<h6>Ayurveda is believed as the oldest treatment in the world. The basis of Ayurveda treatment is a process of purification and rejuvenation. </h6>
+					</div>
+				</div>
+			</div>
+			<div class="item item2">
+				<div class="container">
+					<div class="carousel-caption">
+						<h3>With a Touch of <span>nature.</span></h3>
+						<p>Pure herbs as medicines</p>
+						<h6>The primary goal of Ayurvedic medicine is to help people live long, healthy and balanced lives without the need for prescription drugs, complicated surgeries or suffering through painful conditions.</h6>
+					</div>
+				</div>
+			</div>
+			<div class="item item3">
+				<div class="container">
+					<div class="carousel-caption">
+                        <h3><span>Detoxify</span> your body and mind.</h3>
+						<p>An age-old unique healing method</p>
+                        <h6>Panchakarma is a process that involves 5 methods to balance the <i>doshas</i> in your body and rejuvenate it. <i>Pancha</i> means five and karma means treatment or action.</h6>
+					</div>
+				</div>
+			</div>
+			<div class="item item4">
+				<div class="container">
+					<div class="carousel-caption">
+						<h3>Ultimate Mind-Body <span>Healing.</span></h3>
+						<p>Restoring the body’s innate balance</p>
+						<h6>When your emotional agni is efficient, you can withdraw anything that is nourishing and eliminate the rest. The inability to metabolize feelings creates the same amount of toxic residue as undigested nourishment.</h6>
+					</div>
+				</div>
+			</div>
+		</div>
+		<a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+			<span class="fa fa-chevron-left" aria-hidden="true"></span>
+			<span class="sr-only">Previous</span>
+		</a>
+		<a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+			<span class="fa fa-chevron-right" aria-hidden="true"></span>
+			<span class="sr-only">Next</span>
+		</a>
+		<!-- The Modal -->
+	</div>
+	<div class="agile-about amcls-section">
+	<div class="agileits-about-btm">
+        <div class="container">
+			<div class="tittle_head_Sodhis">
+				<h3 class="heading-agileinfo">
+					Ayurveda Multispeciality Centre
+					<span>
+						Ayurveda accepts all forms of eastern and western healing sciences in their appropriate time and place—it rejects nothing. Our intentions are to serve humanity through Ayurveda.
+					</span>
+				</h3>
+			</div>
+            <div id="prominent_about_pic">
+                <img src="{% static 'amcweb/images/drsimran.png' %}" alt="Dr. Simran Sodhi" height="400" />
+            </div>
+            <div id="prominent_about_quote">
+                        <blockquote class="tag-line">
+            <p>Live in a way that you don't fall ill.</p>
+            <footer>Dr. Simran Sodhi</footer>
+        </blockquote>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+        <div class="services">
+            <div class="container">
+                <h3 class="heading-agileinfo">Our Specializations<span>We offer extensive medical procedures to outbound and inbound patients.</span></h3>
+                <div class="services-top-grids">
+                    <div class="col-md-4">
+                        <div class="grid1">
+                            <img src="{% static 'amcweb/icons/joint_pain.png' %}" alt="Joint Pain" height="50" />
+                            <h4>Joint Pain</h4>
+                            <p>Lorem ipsum dolor sit amet, Sed ut perspiciatis unde omnis iste natus error sit voluptatem </p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="grid1">
+                            <img src="{% static 'amcweb/icons/hair.png' %}" alt="Hair Problems" height="50" />
+                            <h4>Hair Problems</h4>
+                            <p>Lorem ipsum dolor sit amet, Sed ut perspiciatis unde omnis iste natus error sit voluptatem </p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="grid1">
+                            <img src="{% static 'amcweb/icons/pregnant.png' %}" alt="Infertility" height="50" />
+                            <h4>Infertility</h4>
+                            <p>Lorem ipsum dolor sit amet, Sed ut perspiciatis unde omnis iste natus error sit voluptatem </p>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="services-top-grids">
+                    <div class="col-md-4">
+                        <div class="grid1">
+                            <img src="{% static 'amcweb/icons/no_alcohol.png' %}" alt="Joint Pain" height="50" />
+                            <h4>Alcohol De-addiction</h4>
+                            <p>Lorem ipsum dolor sit amet, Sed ut perspiciatis unde omnis iste natus error sit voluptatem </p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="grid1">
+                            <img src="{% static 'amcweb/icons/yoga.png' %}" alt="Hair Problems" height="50" />
+                            <h4>Yoga</h4>
+                            <p>Lorem ipsum dolor sit amet, Sed ut perspiciatis unde omnis iste natus error sit voluptatem </p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="grid1">
+                            <img src="{% static 'amcweb/icons/eye.png' %}" alt="Eye Sight" height="50" />
+                            <h4>Eye Sight</h4>
+                            <p>Lorem ipsum dolor sit amet, Sed ut perspiciatis unde omnis iste natus error sit voluptatem </p>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="services-bottom-grids">
+                    <div class="col-md-4">
+                        <div class="grid1">
+                            <img src="{% static 'amcweb/icons/sexual_wellness.png' %}" alt="Sexual Wellness" height="50" />
+                            <h4>Sexual Wellness</h4>
+                            <p>Lorem ipsum dolor sit amet, Sed ut perspiciatis unde omnis iste natus error sit voluptatem </p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="grid1">
+                            <img src="{% static 'amcweb/icons/migraine.png' %}" alt="Migraine" height="50" />
+                            <h4>Migraine</h4>
+                            <p>Lorem ipsum dolor sit amet, Sed ut perspiciatis unde omnis iste natus error sit voluptatem </p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="grid1">
+                            <img src="{% static 'amcweb/icons/skin_disorders.png' %}" alt="Skin Problems" height="50" />
+                            <h4>Skin Disorders</h4>
+                            <p>Lorem ipsum dolor sit amet, Sed ut perspiciatis unde omnis iste natus error sit voluptatem </p>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="services-bottom-grids">
+                    <div class="col-md-4">
+                    </div>
+                <div class="col-md-4">
+                </div>
+                    <div class="col-md-2"></div>
+                    <div class="col-md-2">
+                       <div class="all-treatments">
+                           <a href="#">
+                               See all
+                               <i class="fa fa-long-arrow-right" style="margin-left: 20px;" aria-hidden="true"></i>
+                           </a>
+                       </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <div class="emergency_cases_amcls">
+    <div class="emergency_cases_bt">
+        <div class="container">
+        <div class="emergency_cases_top">
+            <div class="col-md-6 emergency_cases_amcls_left">
+                <h4>Opening Hours</h4>
+                <h6>Monday - Friday&nbsp;<span class="eme">9:00 AM - 6:00 PM</span></h6>
+                <h6>Saturday - Sunday&nbsp;<span class="eme">9:00 AM - 2:00 PM</span></h6>
+            </div>
+            <div class="col-md-6 emergency_cases_amcls_right">
+                <h4>Book an appointment</h4>
+                <h5><i class="fa fa-phone" aria-hidden="true"></i>9876100870</h5>
+                <br>
+                <h6 style="margin-left: 50px;">or <span><a href="appointment">Click here</a></span></h6>
+            </div>
+
+            <div class="clearfix"></div>
+            </div>
+        </div>
+        </div>
+    </div>
+
+    <div class="tesimonials">
+    <div class="tesimonials_tp">
+            <div class="container">
+                <div class="tittle_head_Sodhis">
+                    <h3 class="heading-agileinfo te">What Our Patients Say<span class="te">Here is how ayurveda has benefited patients from around the globe.</span></h3>
+                </div>
+                <div class="inner_sec_info_agileits_amc">
+                    <div class="test_grid_sec">
+                        <div class="col-md-offset-2 col-md-8">
+                            <div class="carousel slide two" data-ride="carousel" id="quote-carousel">
+                                <!-- Bottom Carousel Indicators -->
+                                <ol class="carousel-indicators two">
+                                    <li data-target="#quote-carousel" data-slide-to="0" class="active"></li>
+                                    <li data-target="#quote-carousel" data-slide-to="1"></li>
+                                    <li data-target="#quote-carousel" data-slide-to="2"></li>
+                                </ol>
+
+                                <!-- Carousel Slides / Quotes -->
+                                <div class="carousel-inner">
+
+                                    <!-- Quote 1 -->
+                                    <div class="item active">
+                                        <blockquote>
+                                            <div class="test_grid">
+                                                <div class="col-sm-3 text-center test_img">
+                                                    <img src="{% static 'amcweb/images/ts1.jpg' %}" alt=" " class="img-responsive" />
+
+                                                </div>
+                                                <div class="col-sm-9 test_img_info">
+                                                    <p>Maecenas quis neque libero. Class aptent taciti.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam
+                                                        auctor nec lacus ut tempor. Mauris.</p>
+                                                    <h6>Sara Lisbon</h6>
+                                                </div>
+                                            </div>
+                                        </blockquote>
+                                    </div>
+                                    <!-- Quote 2 -->
+                                    <div class="item">
+                                        <blockquote>
+                                            <div class="test_grid">
+                                                <div class="col-sm-3 text-center test_img">
+                                                    <img src="{% static 'amcweb/images/ts2.jpg' %}" alt=" " class="img-responsive" />
+                                                </div>
+                                                <div class="col-sm-9 test_img_info">
+                                                    <p>Lorem ipsum dolor sit amet. Class aptent taciti.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam
+                                                        auctor nec lacus ut tempor. Mauris.</p>
+                                                    <h6>Jane Wearne</h6>
+                                                </div>
+                                            </div>
+                                        </blockquote>
+                                    </div>
+                                    <!-- Quote 3 -->
+                                    <div class="item">
+                                        <blockquote>
+                                            <div class="test_grid">
+                                                <div class="col-sm-3 text-center test_img">
+                                                    <img src="{% static 'amcweb/images/ts3.jpg' %}" alt=" " class="img-responsive" />
+                                                </div>
+                                                <div class="col-sm-9 test_img_info">
+                                                    <p>Maecenas quis neque libero. Class aptent taciti.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam
+                                                        auctor nec lacus ut tempor. Mauris.</p>
+                                                    <h6>Alice Williams</h6>
+                                                </div>
+                                            </div>
+                                        </blockquote>
+                                    </div>
+                                </div>
+
+                                <!-- Carousel Buttons Next/Prev -->
+                                <a data-slide="prev" href="#quote-carousel" class="left carousel-control"><i class="fa fa-chevron-left"></i></a>
+                                <a data-slide="next" href="#quote-carousel" class="right carousel-control"><i class="fa fa-chevron-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+	<div class="banner-bottom">
+		<div class="container">
+			<div class="tittle_head_Sodhis">
+				<h3 class="heading-agileinfo">
+					Ayurveda in your inbox
+					<span>
+						Get the power of ayurveda right into your inbox by subscribing to our newsletter.
+					</span>
+				</h3>
+			</div>
+            <form action="{% url 'amcweb:index' %}" method="POST" id="frm_subscribe">
+                {% csrf_token %}
+                <img src="{% static 'amcweb/icons/mail.png' %}" alt="Email" class="sub-icon" height="40" />
+                <h4>
+                    Subscribe to the get articles in your e-mail
+                </h4>
+                <input type="hidden" name="type" value="subscribe" />
+                <input type="text" id="ff_name" name="name" placeholder="Full Name" required/>
+                <input type="email" id="ff_email" name="email" placeholder="Your email address" required/>
+                <input type="tel" id="ff_phone" name="phone" placeholder="Phone number (optional)" />
+                <br>
+				<input type="submit" value="Subscribe" class="subscribe-button" id="btn_subscribe" />
+                <img src="{% static 'amcweb/gifs/amc-loader.gif' %}" id="subscribe_spinner" alt="loading..." height="40px" style="display:none" />
+            </form>
+            <form action="{% url 'amcweb:index' %}" method="POST" id="frm_whatsapp">
+                {% csrf_token %}
+                <img src="{% static 'amcweb/icons/whatsapp.png' %}" alt="Whatsapp" class="sub-icon" height="40" />
+                <h4>Subscribe for important announcements on whatsapp</h4>
+                <input type="hidden" name="type" value="whatsapp_subscribe" />
+                <input type="text" id="ff_name1" name="name" placeholder="Full Name" required/>
+                <input type="tel" id="ff_phone_whatsapp" name="phone" placeholder="Whatsapp number" required/>
+                <br>
+				<input type="submit" value="Subscribe" class="subscribe-button" id="btn_whatsapp" />
+                <img src="{% static 'amcweb/gifs/amc-loader.gif' %}" id="whatsapp_spinner" alt="loading..." height="40px" style="display:none" />
+            </form>
+            <div class="clearfix"> </div>
+        </div>
+    </div>
+    <script>
+        $('#frm_subscribe').on('submit', e => $('#subscribe_spinner').show());
+        $('.msg-close-btn').on('click', e => {
+            msg_to_close = e.target.attributes['close-target'].value;
+            $(`#${msg_to_close}`).hide();
+            });
+    </script>
+
+	<div class="modal video-modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModal">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					New Clinic
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>						
+				</div>
+					<div class="modal-body">
+						<img src="{% static 'amcweb/images/g7.jpg' %}" alt=" " class="img-responsive" />
+						<p>Ut enim ad minima veniam, quis nostrum 
+							exercitationem ullam corporis suscipit laboriosam, 
+							nisi ut aliquid ex ea commodi consequatur? Quis autem 
+							vel eum iure reprehenderit qui in ea voluptate velit 
+							esse quam nihil molestiae consequatur, vel illum qui 
+							dolorem eum fugiat quo voluptas nulla pariatur.
+							<i>" Quis autem vel eum iure reprehenderit qui in ea voluptate velit 
+								esse quam nihil molestiae consequatur.</i></p>
+					</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}

@@ -1,0 +1,113 @@
+.top-message {
+    text-align: center;
+    background: orange;
+    line-height: 2em;
+    color: white;
+    font-size: 1.2em;
+}
+.msg-close-btn {
+    float: right;
+    font-size: 1.5em;
+    margin-right: 10px;
+}
+.msg-close-btn:hover {
+    opacity: .7;
+    cursor: pointer;
+}
+#frm_subscribe {
+    width: 50%;
+    float: left;
+    min-width: 350px;
+}
+#frm_whatsapp {
+    width: 50%;
+    float: left;
+    min-width: 350px;
+}
+#frm_whatsapp > input[type=text],input[type=tel],input[type=email] {
+    width: 70%;
+    height: 40px;
+    max-width: 400px;
+    padding: 5px;
+    margin-top: 10px;
+}
+#frm_subscribe input[type=text],input[type=tel],input[type=email] {
+    width: 70%;
+    height: 40px;
+    max-width: 400px;
+    padding: 5px;
+    margin-top: 10px;
+}
+.subscribe-button {
+    width: 30%;
+    min-width: 150px;
+    height: 30px;
+    background: #0d790d;
+    color: white;
+    outline: none;
+    border: none;
+    margin-top: 10px;
+}
+.subscribe-button:hover {
+    background: forestgreen;
+    transition: none;
+}
+form[id^="frm"] {
+    text-align: center;
+    margin-bottom: 30px;
+}
+.sub-icon {
+    margin: 10px;
+}
+.last-li {
+    background: #0f780d;
+}
+.last-li a {
+    color: white!important;
+}
+.last-li:hover {
+    background: forestgreen;
+}
+.last-li > a:hover {
+    background: none!important;
+    color: none!important;
+}
+.tag-line {
+    width: 350px;
+    margin: 25% auto;
+}
+#prominent_about_pic {
+    width: 50%;
+    float: left;
+    min-width: 350px;
+}
+#prominent_about_quote {
+    width: 50%;
+    float: left;
+    min-width: 350px;
+    vertical-align: middle;
+}
+#prominent_about_pic img {
+    float: right;
+    margin: 20px;
+}
+.all-treatments {
+    margin-top: 30px;
+    font-size: 1.2em;
+    color: white;
+    background: #1CC3B6;
+    text-align: center;
+    -webkit-box-shadow: 0px 1px 8px 0px rgba(158, 158, 158, 0.75);
+    -moz-box-shadow: 0px 1px 8px 0px rgba(158, 158, 158, 0.75);
+    box-shadow: 0px 1px 8px 0px rgba(158, 158, 158, 0.75);
+}
+.all-treatments:hover {
+    background: #12a297;
+}
+.all-treatments a {
+    color: white;
+    width: 100%;
+    display: block;
+    height: 100%;
+    padding: 5px 15px;
+}

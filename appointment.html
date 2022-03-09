@@ -1,0 +1,330 @@
+{% extends 'amcweb/master.html' %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block title %}Make an appointment :: AMC Ludhiana{% endblock %}
+{% block head_last %}
+	<link href="{% static 'amcweb/css/appointment_style.css' %}" rel="stylesheet" type="text/css" media="all" />
+{% endblock %}
+{% block main_content %}
+<script type="text/javascript" src="{% static 'amcweb/js/moment.js' %}"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
+<div class="banner_inner_content_agile_amcl">
+
+</div>
+	<!--//banner -->
+<script>
+    /**
+    * Reads all the form fields and returns a map of fields and values.
+    */
+    function readFormFields() {
+        fields = $('#appointment-form .form-ele')
+        modalData = {};
+        fields.map(field => modalData[fields[field].id.substr(3)] = fields[field].value)
+
+        return modalData;
+    }
+
+    function formatDate(dateStr) {
+        let appointmentDate = new Date(dateStr);
+        return  appointmentDate.toDateString() + ' at ' + appointmentDate.toLocaleTimeString().substr(0, 5);
+    }
+
+    function format_for_modal(formData) {
+        if (formData['patient_id'] != ''){
+            formData['patient_id'] = '(#' + formData['patient_id'] + ')';
+        }
+        return formData;
+    }
+
+    function populateModal() {
+        if(validateForm())
+        {
+            formData = format_for_modal(readFormFields());
+            let modalPlaceholders = $('.field_value');
+            modalPlaceholders.map(placeholder =>
+                    $('#' + modalPlaceholders[placeholder].id).text(
+                        modalPlaceholders[placeholder].id.substr(4) === 'visiting_on'
+                        ? formatDate(formData[modalPlaceholders[placeholder].id.substr(4)])
+                        : formData[modalPlaceholders[placeholder].id.substr(4)]
+                    )
+            )
+            $('#form_invalid_msg').hide();
+            $('#myModal').modal('show');
+        } else {
+            $('#form_invalid_msg').show();
+        }
+    }
+
+    /**
+    * Validates the form before opening the modal.
+    */
+    function validateForm() {
+      formData = readFormFields();
+      emptyFields = Object.keys(formData).filter(field => formData[field] === '' || formData[field] == -1);
+      var requiredFields = ['name', 'gender', 'birth_year', 'contact', 'visiting_on', 'purpose']
+
+      // checking if any required field is missed
+      missingRequiredField = false;
+      emptyFields.forEach(field =>
+        missingRequiredField = requiredFields.filter(reqField => reqField == field).length > 0 ? true : missingRequiredField
+      );
+
+      return !missingRequiredField;
+    }
+</script>
+{% if msg %}
+<br>
+<br>
+<div class="container_1">
+    Appointment booked successfully.
+    {{ msg.msg }}
+    {{ msg.appointment }}
+    <a href="appointment" class="submit-button">Book another</a>
+</div>
+<br>
+<br>
+{% endif %}
+{% if not msg.only %}
+<div class="amcls-banner">
+	<div class="heading">
+		<h1>Make an appointment</h1>
+	</div>
+    <div class="container_1">
+        <div class="heading">
+            <h2>Enter Patients Details</h2>
+            <p>Fill the details below to book an appointment.</p>
+        </div>
+        <form id="appointment-form" action="" method="post">
+            {% csrf_token %}
+            <div class="agile-form">
+                <ul class="field-list">
+                    <li>
+                        <label class="form-label">
+                            Already have your patient number?
+                        </label>
+                        <div class="form-input">
+                            {{ form.patient_id|attr:'placeholder:Patient number'|add_class:'form-ele' }}
+                            <img src="{% static 'amcweb/gifs/amc-loader.gif' %}" id="pat_id_spinner" alt="loading..." height="40px" style="display:none" />
+                            <span id="pat_name"></span>
+                            <span id="pat_name_inst" style="display:none">Not you?</span>
+                            <span id="pat_name_inst2" style="display:none">Re-enter correct patient number</span>
+                            {{ form.patient_id.errors }}
+                        </div>
+                    </li>
+                    <li>
+                        <label class="form-label">
+                            Full Name
+                            <span class="form-required"> * </span>
+                        </label>
+                        <div class="form-input">
+                            {{ form.name|attr:'placeholder:Enter Patients Name'|add_class:'form-ele' }}
+                            {{ form.name.errors }}
+                        </div>
+                    </li>
+                    <li>
+                        <label class="form-label">
+                           Gender
+                           <span class="form-required"> * </span>
+                        </label>
+                        <div class="form-input">
+                            {{ form.gender|add_class:'form-ele' }}
+                            {{ form.gender.errors }}
+                        </div>
+                    <li>
+                    <li>
+                        <label class="form-label">
+                           Year of Birth
+                           <span class="form-required"> * </span>
+                        </label>
+                        <div class="form-input">
+                            {{ form.birth_year|add_class:'form-ele' }}
+                            {{ form.birth_year.errors }}
+                        </div>
+                    </li>
+                    <li>
+                        <label class="form-label">
+                           Mobile Number
+                           <span class="form-required"> * </span>
+                        </label>
+                        <div class="form-input">
+                            {{ form.contact|attr:'placeholder:Mobile Number'|add_class:'form-ele' }}
+                            {{ form.contact.errors }}
+                        </div>
+                    </li>
+                    <li>
+                        <label class="form-label">
+                           E-Mail Address
+                           <!--<span class="form-required"> * </span>-->
+                        </label>
+                        <div class="form-input">
+                            {{ form.email|attr:'placeholder:myname@example.com'|add_class:'form-ele' }}
+                            {{ form.email.errors }}
+                        </div>
+                    </li>
+                    <li>
+                        <label class="form-label">
+                           Visiting on
+                           <span class="form-required"> * </span>
+                        </label>
+                        <div class="form-input">
+                            <div id="DateTimePicker">
+                                <div class="col-sm-6" style="padding:0">
+                                    <div class="form-group">
+                                        <div class='input-group date' id='datetimepicker11'>
+                                            {{ form.visiting_on|add_class:'form-control'|attr:'placeholder:MM/DD/YYYY hh:mm'|add_class:'form-ele' }}
+                                            <span class="input-group-addon">
+                                                <span class="glyphicon glyphicon-calendar">
+                                                </span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <script type="text/javascript">
+                                    $(function () {
+                                        $('#datetimepicker11').datetimepicker({
+                                            minDate: new Date(),
+                                            daysOfWeekDisabled: [0],
+                                            format: 'MM/DD/Y HH:mm',
+                                        });
+                                    });
+                                </script>
+                            </div>
+                            {{ form.visiting_on.errors }}
+                        </div>
+                    </li>
+                    <li>
+                        <label class="form-label">
+                            Appointment type
+                            <span class="form-required"> * </span>
+                        </label>
+                        <div class="form-input">
+                            {{ form.purpose|add_class:'form-ele' }}
+                            {{ form.purpose.errors }}
+                        </div>
+                    </li>
+                    <li>
+                        <label class="form-label1">
+                            Mention any comments here. (optional)
+                        </label>
+                        <div class="form-input2">
+                            {{ form.comment|attr:'rows:3'|attr:'placeholder:For ex: Mention any prolonged illness patient might be suffering from.'|add_class:'form-ele' }}
+                            {{ form.comment.errors }}
+                        </div>
+                    </li>
+                </ul>
+                <div id="form_invalid_msg" class="form-invalid-msg">Fill in all the details above, before booking.</div>
+                <span class="submit-button" data-target="#myModal" onclick="populateModal()">Book appointment</span>
+            </div>
+            <!-- modal -->
+            <div class="modal video-modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModal">
+		        <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            Confirm appointment
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        </div>
+                            <div class="modal-body">
+                                <img src="{% static 'amcweb/images/gs7.jpg' %}" alt="Appointment confirmation image" class="img-responsive" />
+                                <p id="ModalContent">
+                                    <!-- Do not change the IDs of the following spans. Used to populate data. -->
+                                    <strong><span class="field_value" id="mdl_name"></span></strong> &nbsp;
+                                    <span class="field_value" id="mdl_patient_id"></span>
+                                    <br>
+                                    booking an appointment on
+                                    <br>
+                                    <strong>
+                                        <span class="field_value" id="mdl_visiting_on" style="font-size: 2em;"></span>
+                                    </strong>
+                                    <br>
+                                    for
+                                    <strong>
+                                        <span class="field_value" id="mdl_purpose" style="font-size: 1.2em;"></span>
+                                    </strong>
+                                    <br>
+                                    Your details are as follows:
+                                    <br>
+                                    <table class="modal_tbl">
+                                        <tr>
+                                            <td>Gender</td>
+                                            <td>
+                                                <span class="field_value" id="mdl_gender"></span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Contact</td>
+                                            <td>
+                                                <span class="field_value" id="mdl_contact"></span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Birth Year</td>
+                                            <td>
+                                                <span class="field_value" id="mdl_birth_year"></span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Email</td>
+                                            <td>
+                                                <span class="field_value" id="mdl_email"></span>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    <br>
+                                </p>
+                                You will receive an email confirmation once you confirm this appointment.
+                                <input id="appointment_submit" type="submit" value="Confirm Appointment">
+                                <img src="{% static 'amcweb/gifs/amc-loader.gif' %}" id="subscribe_spinner" alt="loading..." height="40px" style="display:none" />
+                            </div>
+                    </div>
+		        </div>
+	        </div>
+            <!-- //modal -->
+        </form>
+        <script>
+            $('#appointment_submit').on('click', () => {
+                $('#subscribe_spinner').show();
+                $('#appointment_submit').hide();
+                });
+            $('#pat_id_spinner').hide();
+            $('#id_patient_id').on('blur', () => {
+                $('#pat_name').text('');
+                $('#pat_name_inst').hide();
+                $('#pat_name_inst2').hide();
+
+                const pat_id = $('#id_patient_id').val();
+                if(pat_id != '') {
+                    $('#pat_id_spinner').show();
+                    $.get('/api/patient/' + pat_id,
+                    resp => {
+                        $('#pat_name').text(resp['name']);
+                        $('#pat_name_inst').show();
+                        }, 'json')
+                    .done(() => {})
+                    .fail(() => {
+                        $('#pat_name').text(`Wrong patient number ${pat_id}`);
+                        $('#id_patient_id').val('');
+                        })
+                    .always(() => $('#pat_id_spinner').hide());
+                }
+            });
+
+            $('#pat_name_inst').on('click', () => {
+                $('#id_patient_id').val('');
+                $('#pat_name_inst').hide();
+                $('#pat_name_inst2').show();
+                $('#pat_name').text('');
+            });
+
+            $(document).on("keypress", ":input:not(textarea):not([type=submit])", e => {
+                if (event.keyCode == 13) {
+                   event.preventDefault();
+                }
+            });
+        </script>
+    </div>
+</div>
+{% endif %}
+
+{% endblock %}
+<!-- TODO: do not allow past dates -->
